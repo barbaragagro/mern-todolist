@@ -14,6 +14,7 @@ function App() {
   useEffect(() => {
     if (localStorage.getItem('name')) setName(localStorage.getItem('name'));
   }, []);
+
   const getTodos = async () => {
     await fetch('http://localhost:3001/todos')
       .then((res) => res.json())

@@ -7,22 +7,17 @@ import path from 'path';
 
 dotenv.config();
 
-const app = express();
-
-const __dirname = path.resolve();
-app.use(express.static(path.join(__dirname, '/client/build')));
-
-app.get('*', (req, res) => {
-  res.sendFile(path.join(__dirname, 'client', 'build', 'index.html'));
-});
-
-app.use(express.json());
-app.use(cors());
-
 mongoose
   .connect(process.env.MONGO)
   .then(() => console.log('Connected to DB'))
   .catch(console.error);
+
+const app = express();
+
+
+
+app.use(express.json());
+app.use(cors());
 
 app.get('/todos', async (req, res) => {
   const todos = await Todo.find();
